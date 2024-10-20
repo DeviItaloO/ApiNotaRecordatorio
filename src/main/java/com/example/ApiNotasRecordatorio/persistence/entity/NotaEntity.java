@@ -1,5 +1,6 @@
 package com.example.ApiNotasRecordatorio.persistence.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -34,10 +35,12 @@ public class NotaEntity {
 
     @ManyToOne
     @JoinColumn(name = "idUsuario", nullable = false)
+    @JsonBackReference(value = "usuario-nota")
     private UsuarioEntity usuario;
 
     @ManyToOne
     @JoinColumn(name = "idCategoria", nullable = false)
+    @JsonBackReference(value = "categoria-nota")
     private CategoriaEntity categoria;
 
     @Column(name = "fechaCreacion", nullable = false)

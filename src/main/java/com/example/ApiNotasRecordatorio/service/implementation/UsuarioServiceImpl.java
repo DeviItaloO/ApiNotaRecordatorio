@@ -7,7 +7,7 @@ import com.example.ApiNotasRecordatorio.service.interfaces.IUsuarioService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,6 +20,7 @@ public class UsuarioServiceImpl implements IUsuarioService {
     private IUsuarioDAO usuarioDAO;
 
     @Override
+    /*@Transactional(readOnly = true)*/
     public List<UsuarioDTO> findAll() {
         ModelMapper modelMapper = new ModelMapper();
         return this.usuarioDAO.findAll()
@@ -41,14 +42,27 @@ public class UsuarioServiceImpl implements IUsuarioService {
     }
 
     @Override
+    @Transactional(readOnly = true)
+    public UsuarioDTO findByEmailAndContrasenia(String email, String contrasenia) {
+        Optional<UsuarioEntity> usuarioEntity = usuarioDAO.findByEmailAndContrasenia(email, contrasenia);
+        if (usuarioEntity.isPresent()) {
+            ModelMapper modelMapper = new ModelMapper();
+            return modelMapper.map(usuarioEntity.get(), UsuarioDTO.class);
+        } else {
+            return null;
+        }
+    }
+
+
+        @Override
     public UsuarioDTO saveUsuario(UsuarioDTO usuarioDTO) {
         try {
             ModelMapper modelMapper = new ModelMapper();
             UsuarioEntity usuarioEntity = modelMapper.map(usuarioDTO, UsuarioEntity.class);
             this.usuarioDAO.saveUsuario(usuarioEntity);
-            return usuarioDTO;
+            return modelMapper.map(usuarioEntity, UsuarioDTO.class);
         }catch (Exception e){
-            throw new UnsupportedOperationException("Error al guardar el usuario");
+            throw new UnsupportedOperationException("Error al guardar el usuario" + e);
         }
     }
 

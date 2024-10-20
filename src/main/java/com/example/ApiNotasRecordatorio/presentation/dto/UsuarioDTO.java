@@ -9,7 +9,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 public class UsuarioDTO {
     private Long id;
@@ -18,4 +17,11 @@ public class UsuarioDTO {
     private String contrasenia;
     private LocalDateTime fechaCreacion;
     private List<NotaEntity> notas;
+
+    public UsuarioDTO(String nombre, String email, String contrasenia) {
+        this.nombre = nombre;
+        this.email = email;
+        this.contrasenia = contrasenia;
+        this.fechaCreacion = LocalDateTime.now();
+    }
 }

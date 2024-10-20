@@ -1,5 +1,6 @@
 package com.example.ApiNotasRecordatorio.persistence.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,5 +29,6 @@ public class CategoriaEntity {
     private LocalDateTime fechaCreacion;
 
     @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference(value = "categoria-nota")
     private List<NotaEntity> notas;
 }

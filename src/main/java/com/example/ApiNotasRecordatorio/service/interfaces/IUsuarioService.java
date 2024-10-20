@@ -10,4 +10,7 @@ public interface IUsuarioService {
     UsuarioDTO saveUsuario(UsuarioDTO usuario);
     UsuarioDTO updateUsuario(UsuarioDTO usuario, Long id);
     String deleteUsuario(Long id);
+
+    // Método para buscar por email y contraseña
+    UsuarioDTO findByEmailAndContrasenia(String email, String contrasenia);
 }

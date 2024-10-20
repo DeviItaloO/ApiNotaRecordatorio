@@ -29,17 +29,30 @@ public class UsuarioDAOImpl implements IUsuarioDAO {
     }
 
     @Override
+    @Transactional
     public void saveUsuario(UsuarioEntity usuarioEntity) {
         this.em.persist(usuarioEntity);
     }
 
     @Override
+    @Transactional
     public void updateUsuario(UsuarioEntity usuarioEntity) {
         this.em.merge(usuarioEntity);
     }
 
     @Override
+    @Transactional
     public void deleteUsuario(UsuarioEntity usuarioEntity) {
         this.em.remove(usuarioEntity);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<UsuarioEntity> findByEmailAndContrasenia(String email, String contrasenia) {
+        String query = "SELECT u FROM UsuarioEntity u WHERE u.email = :email AND u.contrasenia = :contrasenia";
+        return em.createQuery(query, UsuarioEntity.class)
+                .setParameter("email", email)
+                .setParameter("contrasenia", contrasenia)
+                .getResultList().stream().findFirst();
     }
 }
