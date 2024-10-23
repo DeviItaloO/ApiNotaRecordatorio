@@ -10,15 +10,15 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class CategoriaDTO {
     private Long id;
     private String nombre;
     private LocalDateTime fechaCreacion;
     private List<NotaEntity> notas;
 
-    public CategoriaDTO(String nombre) {
+    public CategoriaDTO(String nombre, LocalDateTime fechaCreacion, List<NotaEntity> notas) {
         this.nombre = nombre;
         this.fechaCreacion = LocalDateTime.now();
+        this.notas = notas;
     }
 }

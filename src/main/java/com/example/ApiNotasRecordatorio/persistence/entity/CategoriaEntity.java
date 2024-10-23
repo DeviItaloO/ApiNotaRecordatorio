@@ -32,11 +32,6 @@ public class CategoriaEntity {
     @JsonManagedReference(value = "categoria-nota")
     private List<NotaEntity> notas;
 
-
-
-
-
-
     @PrePersist
     protected void onCreate() {
         this.fechaCreacion = LocalDateTime.now();

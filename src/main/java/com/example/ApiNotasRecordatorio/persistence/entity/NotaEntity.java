@@ -46,5 +46,10 @@ public class NotaEntity {
     @Column(name = "fechaCreacion", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime fechaCreacion;
+
+    @PrePersist
+    protected void onCreate() {
+        this.fechaCreacion = LocalDateTime.now();
+    }
 }
 //JoseRG1

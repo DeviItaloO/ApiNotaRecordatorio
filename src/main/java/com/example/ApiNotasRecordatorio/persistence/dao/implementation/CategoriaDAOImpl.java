@@ -17,7 +17,7 @@ public class CategoriaDAOImpl implements ICategoriaDAO {
     private EntityManager em;
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public List<CategoriaEntity> findAll() {
         return this.em.createQuery("SELECT c FROM CategoriaEntity c", CategoriaEntity.class).getResultList();
     }

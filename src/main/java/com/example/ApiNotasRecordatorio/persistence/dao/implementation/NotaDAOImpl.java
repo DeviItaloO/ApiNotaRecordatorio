@@ -4,8 +4,8 @@ import com.example.ApiNotasRecordatorio.persistence.dao.interfaces.INotaDAO;
 import com.example.ApiNotasRecordatorio.persistence.entity.NotaEntity;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,7 +17,7 @@ public class NotaDAOImpl implements INotaDAO {
     private EntityManager em;
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public List<NotaEntity> findAll() {
         return this.em.createQuery("SELECT n FROM NotaEntity n", NotaEntity.class).getResultList();
     }
@@ -47,7 +47,7 @@ public class NotaDAOImpl implements INotaDAO {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public List<NotaEntity> findByUsuarioId(Long idUsuario) {
         String query = "SELECT n FROM NotaEntity n WHERE n.usuario.id = :idUsuario";
         return em.createQuery(query, NotaEntity.class)
@@ -56,7 +56,7 @@ public class NotaDAOImpl implements INotaDAO {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public List<NotaEntity> findByCategoriaId(Long idCategoria) {
         String query = "SELECT n FROM NotaEntity n WHERE n.categoria.id = :idCategoria";
         return em.createQuery(query, NotaEntity.class)

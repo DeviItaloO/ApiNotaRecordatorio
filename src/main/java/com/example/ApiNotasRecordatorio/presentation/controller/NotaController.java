@@ -43,7 +43,7 @@ public class NotaController {
     @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<String> deleteNota(@PathVariable Long id) {
         this.notaService.deleteNota(id);
-        return new ResponseEntity<>("Nota eliminada con éxito", HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(this.notaService.deleteNota(id), HttpStatus.NO_CONTENT);
     }
     // BUSCAR NOTAS POR CATEGORÍA
     @GetMapping("/buscar/categoria/{idCategoria}")
