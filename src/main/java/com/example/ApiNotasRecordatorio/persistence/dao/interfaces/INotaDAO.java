@@ -22,4 +22,4 @@ public interface INotaDAO {
 
     List<NotaEntity> findByCategoriaId(Long idCategoria);
 }
-//JoseRG6
+//JoseRG

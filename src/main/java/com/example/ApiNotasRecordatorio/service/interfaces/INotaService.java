@@ -14,5 +14,5 @@ public interface INotaService {
     List<NotaDTO> findByUsuario(Long idUsuario);
     List<NotaDTO> findByCategoria(Long idCategoria);
 }
-//JoseRG6
+//JoseRG
 
