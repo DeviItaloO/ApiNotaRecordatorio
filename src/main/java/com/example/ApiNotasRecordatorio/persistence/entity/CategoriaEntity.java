@@ -34,6 +34,9 @@ public class CategoriaEntity {
 
 
 
+
+
+
     @PrePersist
     protected void onCreate() {
         this.fechaCreacion = LocalDateTime.now();
