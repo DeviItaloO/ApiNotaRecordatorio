@@ -1,6 +1,7 @@
 package com.example.ApiNotasRecordatorio.persistence.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,11 +9,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
-@Table(name = "Notas")
+@Table(name = "nota")
 @NoArgsConstructor
 @AllArgsConstructor
 public class NotaEntity {
@@ -46,6 +48,10 @@ public class NotaEntity {
     @Column(name = "fechaCreacion", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime fechaCreacion;
+
+    @OneToMany(mappedBy = "nota", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference(value = "comentario-nota")
+    private List<ComentarioEntity> comentarios;
 
     @PrePersist
     protected void onCreate() {
