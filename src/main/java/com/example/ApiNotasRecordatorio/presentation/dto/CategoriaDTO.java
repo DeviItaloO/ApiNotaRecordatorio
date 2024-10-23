@@ -8,17 +8,14 @@ import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
-public class TemasDTO {
+@AllArgsConstructor
+public class CategoriaDTO {
     private Long id;
-    private String titulo;
-    private String descripcion;
-    private String autor;
+    private String nombre;
     private LocalDateTime fechaCreacion;
 
-    public TemasDTO(String titulo, String descripcion, String autor) {
-        this.titulo = titulo;
-        this.descripcion = descripcion;
-        this.autor = autor;
+    public CategoriaDTO(String nombre) {
+        this.nombre = nombre;
         this.fechaCreacion = LocalDateTime.now();
     }
 }
