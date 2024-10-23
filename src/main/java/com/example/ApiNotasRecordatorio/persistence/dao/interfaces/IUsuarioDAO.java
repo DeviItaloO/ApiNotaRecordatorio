@@ -1,8 +1,6 @@
 package com.example.ApiNotasRecordatorio.persistence.dao.interfaces;
 
 import com.example.ApiNotasRecordatorio.persistence.entity.UsuarioEntity;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
