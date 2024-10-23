@@ -50,5 +50,6 @@ public class NotaController {
     public ResponseEntity<List<NotaDTO>> findByCategoria(@PathVariable Long idCategoria) {
         return new ResponseEntity<>(this.notaService.findByCategoria(idCategoria), HttpStatus.OK);
     }
+    //JoseRG
 
 }
