@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ICategoriaService {
     List<CategoriaDTO> findAll();
-    CategoriaDTO findById(long id);
+    CategoriaDTO findById(Long id);
     CategoriaDTO saveCategoria(CategoriaDTO categoria);
     CategoriaDTO updateCategoria(CategoriaDTO categoria, Long id);
     String deleteCategoria(Long id);

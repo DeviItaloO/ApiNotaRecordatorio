@@ -10,7 +10,7 @@ public interface INotaDAO {
 
     List<NotaEntity> findAll();
 
-    Optional<NotaEntity> findById(long id);
+    Optional<NotaEntity> findById(Long id);
 
     void saveNota(NotaEntity nota);
 
@@ -21,5 +21,7 @@ public interface INotaDAO {
     List<NotaEntity> findByUsuarioId(Long idUsuario);
 
     List<NotaEntity> findByCategoriaId(Long idCategoria);
+
+    List<NotaEntity> findAllById(List<Long> ids);
 }
 //JoseRG1

@@ -18,7 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 public class CategoriaEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(name = "nombre", nullable = false, length = 100)

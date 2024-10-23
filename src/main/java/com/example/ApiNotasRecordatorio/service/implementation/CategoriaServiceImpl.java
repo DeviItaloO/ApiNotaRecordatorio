@@ -1,7 +1,9 @@
 package com.example.ApiNotasRecordatorio.service.implementation;
 
 import com.example.ApiNotasRecordatorio.persistence.dao.interfaces.ICategoriaDAO;
+import com.example.ApiNotasRecordatorio.persistence.dao.interfaces.INotaDAO;
 import com.example.ApiNotasRecordatorio.persistence.entity.CategoriaEntity;
+import com.example.ApiNotasRecordatorio.persistence.entity.NotaEntity;
 import com.example.ApiNotasRecordatorio.presentation.dto.CategoriaDTO;
 import com.example.ApiNotasRecordatorio.service.interfaces.ICategoriaService;
 import org.modelmapper.ModelMapper;
@@ -18,6 +20,9 @@ public class CategoriaServiceImpl implements ICategoriaService {
     @Autowired
     private ICategoriaDAO categoriaDAO;
 
+    @Autowired
+    private INotaDAO notaDAO;
+
     @Override
     public List<CategoriaDTO> findAll() {
         ModelMapper modelMapper = new ModelMapper();
@@ -28,7 +33,7 @@ public class CategoriaServiceImpl implements ICategoriaService {
     }
 
     @Override
-    public CategoriaDTO findById(long id) {
+    public CategoriaDTO findById(Long id) {
         Optional<CategoriaEntity> categoriaEntity = this.categoriaDAO.findById(id);
         if (categoriaEntity.isPresent()) {
             ModelMapper modelMapper = new ModelMapper();
@@ -44,8 +49,21 @@ public class CategoriaServiceImpl implements ICategoriaService {
         try {
             ModelMapper modelMapper = new ModelMapper();
             CategoriaEntity categoriaEntity = modelMapper.map(categoriaDTO, CategoriaEntity.class);
+            categoriaEntity.setNombre(categoriaDTO.getNombre());
+            categoriaEntity.setFechaCreacion(categoriaDTO.getFechaCreacion());
+
+            if (categoriaDTO.getNotas() != null) {
+                List<Long> notaIds = categoriaDTO.getNotas().stream()
+                        .map(NotaEntity::getId)
+                        .collect(Collectors.toList());
+
+                List<NotaEntity> notas = notaDAO.findAllById(notaIds);
+                categoriaEntity.setNotas(notas);
+            }
+
             this.categoriaDAO.saveCategoria(categoriaEntity);
-            return modelMapper.map(categoriaEntity, CategoriaDTO.class); // Mapea el entity guardado de vuelta al DTO
+
+            return modelMapper.map(categoriaEntity, CategoriaDTO.class);// Mapea el entity guardado de vuelta al DTO
         } catch (Exception e) {
             throw new UnsupportedOperationException("Error al guardar la categoría: " + e.getMessage());
         }
@@ -59,7 +77,18 @@ public class CategoriaServiceImpl implements ICategoriaService {
             // Actualiza los campos de la categoría existente
             currentCategoriaEntity.setNombre(categoriaDTO.getNombre());
             currentCategoriaEntity.setFechaCreacion(categoriaDTO.getFechaCreacion());
-            
+
+
+            // Asignar notas existentes a la categoría sin modificarlas
+            if (categoriaDTO.getNotas() != null) {
+                List<Long> notaIds = categoriaDTO.getNotas().stream()
+                        .map(NotaEntity::getId)
+                        .collect(Collectors.toList());
+
+                List<NotaEntity> notas = notaDAO.findAllById(notaIds);
+                currentCategoriaEntity.setNotas(notas);
+            }
+
             this.categoriaDAO.updateCategoria(currentCategoriaEntity);
             ModelMapper modelMapper = new ModelMapper();
             return modelMapper.map(currentCategoriaEntity, CategoriaDTO.class);

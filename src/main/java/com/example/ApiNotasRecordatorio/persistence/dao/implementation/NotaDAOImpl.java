@@ -24,7 +24,7 @@ public class NotaDAOImpl implements INotaDAO {
 
     @Override
     @Transactional
-    public Optional<NotaEntity> findById(long id) {
+    public Optional<NotaEntity> findById(Long id) {
         return Optional.ofNullable(this.em.find(NotaEntity.class, id));
     }
 
@@ -61,6 +61,15 @@ public class NotaDAOImpl implements INotaDAO {
         String query = "SELECT n FROM NotaEntity n WHERE n.categoria.id = :idCategoria";
         return em.createQuery(query, NotaEntity.class)
                 .setParameter("idCategoria", idCategoria)
+                .getResultList();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<NotaEntity> findAllById(List<Long> ids) {
+        String query = "SELECT n FROM NotaEntity n WHERE n.id IN :ids";
+        return em.createQuery(query, NotaEntity.class)
+                .setParameter("ids", ids)
                 .getResultList();
     }
 }
