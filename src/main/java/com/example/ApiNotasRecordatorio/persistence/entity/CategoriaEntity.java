@@ -31,4 +31,14 @@ public class CategoriaEntity {
     @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonManagedReference(value = "categoria-nota")
     private List<NotaEntity> notas;
+
+
+
+
+
+
+    @PrePersist
+    protected void onCreate() {
+        this.fechaCreacion = LocalDateTime.now();
+    }
 }
