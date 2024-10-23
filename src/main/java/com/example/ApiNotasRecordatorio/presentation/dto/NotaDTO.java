@@ -29,4 +29,4 @@ public class NotaDTO {
         this.fechaCreacion = LocalDateTime.now(); // Asigna la fecha de creación actual
     }
 }
-//JoseRG
+//JoseRG6
