@@ -47,3 +47,4 @@ public class NotaEntity {
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime fechaCreacion;
 }
+//JoseRG1
