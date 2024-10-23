@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class NotaDTO {
     private Long id;                     // ID único de la nota
     private String titulo;               // Título de la nota
