@@ -73,4 +73,3 @@ public class NotaDAOImpl implements INotaDAO {
                 .getResultList();
     }
 }
-//JoseRG1

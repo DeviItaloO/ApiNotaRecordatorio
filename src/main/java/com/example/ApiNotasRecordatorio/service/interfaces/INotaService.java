@@ -1,7 +1,6 @@
 package com.example.ApiNotasRecordatorio.service.interfaces;
 
 import com.example.ApiNotasRecordatorio.presentation.dto.NotaDTO;
-
 import java.util.List;
 
 public interface INotaService {
@@ -14,5 +13,4 @@ public interface INotaService {
     List<NotaDTO> findByUsuario(Long idUsuario);
     List<NotaDTO> findByCategoria(Long idCategoria);
 }
-//JoseRG1
 

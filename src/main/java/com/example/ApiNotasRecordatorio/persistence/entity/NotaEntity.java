@@ -49,7 +49,7 @@ public class NotaEntity {
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime fechaCreacion;
 
-    @OneToMany(mappedBy = "nota", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+   @OneToMany(mappedBy = "nota", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonManagedReference(value = "comentario-nota")
     private List<ComentarioEntity> comentarios;
 
@@ -58,4 +58,3 @@ public class NotaEntity {
         this.fechaCreacion = LocalDateTime.now();
     }
 }
-//JoseRG1

@@ -9,19 +9,11 @@ public interface INotaDAO {
 
 
     List<NotaEntity> findAll();
-
     Optional<NotaEntity> findById(Long id);
-
     void saveNota(NotaEntity nota);
-
     void updateNota(NotaEntity nota);
-
     void deleteNota(NotaEntity nota);
-
     List<NotaEntity> findByUsuarioId(Long idUsuario);
-
     List<NotaEntity> findByCategoriaId(Long idCategoria);
-
     List<NotaEntity> findAllById(List<Long> ids);
 }
-//JoseRG1

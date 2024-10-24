@@ -12,28 +12,25 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/usuario")
+@RequestMapping("/api/usuario")
 public class UsuarioController {
 
     @Autowired
     private IUsuarioService usuarioService;
 
-    //BUSCAR USUARIOS
     @GetMapping("/buscar")
     public ResponseEntity<List<UsuarioDTO>> findAll() {
         return new ResponseEntity<>(this.usuarioService.findAll(), HttpStatus.OK);
     }
 
-    //BUSCAR UNA USUARIO POR ID
     @GetMapping("/buscar/{id}")
     public ResponseEntity<UsuarioDTO> findById(@PathVariable Long id) {
         return new ResponseEntity<>(this.usuarioService.findById(id), HttpStatus.OK);
     }
 
-    //CREAR USUARIO
     @PostMapping(value = "/crear", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<UsuarioDTO> createPersona(@RequestBody UsuarioDTO UsuarioDTO){
-        return new ResponseEntity<>(this.usuarioService.saveUsuario(UsuarioDTO), HttpStatus.CREATED);
+    public ResponseEntity<UsuarioDTO> createPersona(@RequestBody UsuarioDTO usuarioDTO){
+        return new ResponseEntity<>(this.usuarioService.saveUsuario(usuarioDTO), HttpStatus.CREATED);
     }
 
     //LOGIN DEL USUARIO
@@ -47,13 +44,11 @@ public class UsuarioController {
         }
     }
 
-    //ACTUALIZAR USUARIO
     @PutMapping(value = "/actualizar/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<UsuarioDTO> updatePersona(@RequestBody UsuarioDTO UsuarioDTO, @PathVariable Long id){
-        return new ResponseEntity<>(this.usuarioService.updateUsuario(UsuarioDTO, id), HttpStatus.OK);
+    public ResponseEntity<UsuarioDTO> updatePersona(@RequestBody UsuarioDTO usuarioDTO, @PathVariable Long id){
+        return new ResponseEntity<>(this.usuarioService.updateUsuario(usuarioDTO, id), HttpStatus.OK);
     }
 
-    //ELIMINAR USUARIO
     @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<String> deletePersona(@PathVariable Long id){
         return new ResponseEntity<>(this.usuarioService.deleteUsuario(id), HttpStatus.NO_CONTENT);

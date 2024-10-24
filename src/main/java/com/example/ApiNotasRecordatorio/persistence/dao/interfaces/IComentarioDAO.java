@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IComentarioDAO {
+
     List<ComentarioEntity> findAll();
     Optional<ComentarioEntity> findById(Long id);
     void saveComentario(ComentarioEntity comentario);

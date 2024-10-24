@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ICategoriaDAO {
-    // Métodos para la entidad Categoria
+
     List<CategoriaEntity> findAll();
     Optional<CategoriaEntity> findById(long id);
     void saveCategoria(CategoriaEntity categoria);

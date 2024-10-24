@@ -4,7 +4,6 @@ import com.example.ApiNotasRecordatorio.persistence.dao.interfaces.IComentarioDA
 import com.example.ApiNotasRecordatorio.persistence.entity.ComentarioEntity;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 

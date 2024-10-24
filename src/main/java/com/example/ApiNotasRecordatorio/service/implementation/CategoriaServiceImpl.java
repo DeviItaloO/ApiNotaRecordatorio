@@ -40,7 +40,7 @@ public class CategoriaServiceImpl implements ICategoriaService {
             CategoriaEntity currentCategoriaEntity = categoriaEntity.get();
             return modelMapper.map(currentCategoriaEntity, CategoriaDTO.class);
         } else {
-            return new CategoriaDTO(); // Retorna un DTO vacío si no se encuentra la categoría
+            return new CategoriaDTO();
         }
     }
 
@@ -63,7 +63,7 @@ public class CategoriaServiceImpl implements ICategoriaService {
 
             this.categoriaDAO.saveCategoria(categoriaEntity);
 
-            return modelMapper.map(categoriaEntity, CategoriaDTO.class);// Mapea el entity guardado de vuelta al DTO
+            return modelMapper.map(categoriaEntity, CategoriaDTO.class);
         } catch (Exception e) {
             throw new UnsupportedOperationException("Error al guardar la categoría: " + e.getMessage());
         }
@@ -74,12 +74,10 @@ public class CategoriaServiceImpl implements ICategoriaService {
         Optional<CategoriaEntity> categoriaEntity = this.categoriaDAO.findById(id);
         if (categoriaEntity.isPresent()) {
             CategoriaEntity currentCategoriaEntity = categoriaEntity.get();
-            // Actualiza los campos de la categoría existente
+
             currentCategoriaEntity.setNombre(categoriaDTO.getNombre());
             currentCategoriaEntity.setFechaCreacion(categoriaDTO.getFechaCreacion());
 
-
-            // Asignar notas existentes a la categoría sin modificarlas
             if (categoriaDTO.getNotas() != null) {
                 List<Long> notaIds = categoriaDTO.getNotas().stream()
                         .map(NotaEntity::getId)

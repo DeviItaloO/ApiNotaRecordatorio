@@ -1,7 +1,6 @@
 package com.example.ApiNotasRecordatorio.presentation.dto;
 
 import com.example.ApiNotasRecordatorio.persistence.entity.NotaEntity;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
