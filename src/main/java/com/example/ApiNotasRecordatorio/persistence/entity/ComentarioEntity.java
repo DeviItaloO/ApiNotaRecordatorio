@@ -28,7 +28,7 @@ public class ComentarioEntity {
 
     @ManyToOne
     @JoinColumn(name = "idNota", nullable = false)
-    @JsonBackReference
+    @JsonBackReference(value = "comentario-nota")
     private NotaEntity nota;
 
     @PrePersist
